@@ -3,6 +3,7 @@ import numpy as np
 from HandTrackingModule import HandDetector
 import time
 import subprocess
+import pyautogui
 
 # Constants for window size
 WINDOW_WIDTH = 1280
@@ -122,8 +123,10 @@ class Keyboard:
             # Handle uppercase and lowercase characters based on shift and caps lock state
             if self.shift_pressed or (self.caps_lock and not key.isdigit()):  
                 self.text_space += key.upper()
+                pyautogui.press(key.upper())  # Simulate typing uppercase letter in Notepad
             else:
                 self.text_space += key.lower()
+                pyautogui.press(key.lower())  # Simulate typing lowercase letter in Notepad
 
     # Method to draw the keyboard
     def draw(self, img):
@@ -182,6 +185,7 @@ def main():
 
                 elif button.text == DELETE_BUTTON_TEXT:
                     text_space = text_space[:-1]  # Remove the last character
+                    pyautogui.press('backspace')  # Simulate pressing backspace in Notepad
                 elif button.text == CLEAR_BUTTON_TEXT:
                     text_space = ""  # Clear the text space
                 else:
